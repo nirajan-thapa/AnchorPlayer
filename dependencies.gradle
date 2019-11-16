@@ -12,6 +12,7 @@ ext.versions = [
         MvRx                    : '1.1.0',
         epoxyVersion            : '3.7.0',
         dagger                  : '2.24',
+        constraintLayout        : '1.1.2',
         junit                   : '4.12',
         testRunner              : '1.2.0',
         assertj                 : '3.11.1',
@@ -41,7 +42,8 @@ ext {
     styleDependencies = [
             androidxAppCompat: "androidx.appcompat:appcompat:${versions.androidxAppCompatVersion}",
             material         : "com.google.android.material:material:${versions.materialVersion}",
-            epoxy            : "com.airbnb.android:epoxy:${versions.epoxyVersion}"
+            epoxy            : "com.airbnb.android:epoxy:${versions.epoxyVersion}",
+            constraintLayout : "com.android.support.constraint:constraint-layout:$versions.constraintLayout",
     ]
 
     architectureDependencies = [
