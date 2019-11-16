@@ -49,7 +49,8 @@ ext {
     ]
 
     daggerDependencies = [
-            dagger         : "com.google.dagger:dagger:${versions.dagger}"
+            dagger         : "com.google.dagger:dagger:${versions.dagger}",
+            deaggerAndroidSupport: "com.google.dagger:dagger-android-support:${versions.dagger}"
     ]
 
     kaptDependencies = [

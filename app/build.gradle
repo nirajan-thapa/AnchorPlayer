@@ -23,6 +23,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation architectureDependencies.values()
     implementation kotlinDependencies.values()
     implementation ktxDependencies.values()
     implementation styleDependencies.values()
