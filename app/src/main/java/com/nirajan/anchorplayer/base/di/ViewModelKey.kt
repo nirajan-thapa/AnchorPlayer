@@ -1,6 +1,7 @@
-package com.nirajan.anchorplayer.base
+package com.nirajan.anchorplayer.base.di
 
 import androidx.lifecycle.ViewModel
+import com.nirajan.anchorplayer.base.BaseViewModel
 import dagger.MapKey
 import kotlin.reflect.KClass
 

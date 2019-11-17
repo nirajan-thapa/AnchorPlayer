@@ -31,5 +31,4 @@ dependencies {
     kapt kaptDependencies.values()
 
     implementation testingDependencies.values()
-    implementation uiTestingDependencies.values()
 }

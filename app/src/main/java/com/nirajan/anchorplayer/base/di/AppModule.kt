@@ -1,13 +1,13 @@
 package com.nirajan.anchorplayer.base.di
 
-import androidx.lifecycle.ViewModelProvider
-import com.nirajan.anchorplayer.base.AnchorPlayerViewModelFactory
-import dagger.Binds
+import com.nirajan.anchorplayer.player.PlayerActivity
+import com.nirajan.anchorplayer.player.PlayerFragment
 import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
-@Module
+@Module(includes = [ViewModelModule::class])
 interface AppModule {
 
-    @Binds
-    fun bindViewModelFactory(factory: AnchorPlayerViewModelFactory): ViewModelProvider.Factory
+    @ContributesAndroidInjector fun providePlayerActivity(): PlayerActivity
+    @ContributesAndroidInjector fun providePlayerFragment(): PlayerFragment
 }
