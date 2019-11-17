@@ -29,6 +29,7 @@ dependencies {
     implementation styleDependencies.values()
     implementation injectionDependencies.values()
     implementation apiDependencies.values()
+    implementation imageDependencies.values()
     kapt kaptDependencies.values()
 
     implementation testingDependencies.values()

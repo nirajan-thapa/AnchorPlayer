@@ -9,8 +9,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.nirajan.anchorplayer.R
 import com.nirajan.anchorplayer.base.BaseFragment
 import com.nirajan.anchorplayer.base.simpleController
-import com.nirajan.anchorplayer.player.views.basicRow
 import com.nirajan.anchorplayer.player.views.loadingView
+import com.nirajan.anchorplayer.player.views.trackRow
 
 class PlayerFragment : BaseFragment() {
 
@@ -30,9 +30,10 @@ class PlayerFragment : BaseFragment() {
             return@simpleController
         }
         state.tracks.forEachIndexed { index, track ->
-            basicRow {
+            trackRow {
                 id("track-$index")
                 title(track.title)
+                image(track.imageUrl)
             }
         }
     }
