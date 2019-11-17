@@ -10,16 +10,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.airbnb.mvrx.BaseMvRxFragment
-import com.nirajan.anchorplayer.R
-import com.nirajan.anchorplayer.base.BaseEpoxyController
 
 abstract class BaseFragment : BaseMvRxFragment() {
 
     /** Call [AppCompatActivity.setContentView] with that [LayoutRes] id. */
     @LayoutRes protected abstract fun getLayoutId(): Int
-
-    /** Inject your Activity here. */
-    protected abstract fun injectDependencies()
 
     protected lateinit var recyclerView: EpoxyRecyclerView
     protected lateinit var toolbar: Toolbar
@@ -29,6 +24,14 @@ abstract class BaseFragment : BaseMvRxFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         epoxyController.onRestoreInstanceState(savedInstanceState)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(getLayoutId(), container, false)
     }
 
     override fun invalidate() {

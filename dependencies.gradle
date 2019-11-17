@@ -11,7 +11,7 @@ ext.versions = [
         materialVersion         : '1.0.0',
         MvRx                    : '1.1.0',
         epoxyVersion            : '3.7.0',
-        dagger                  : '2.24',
+        koinVersion             : '2.0.1',
         constraintLayout        : '1.1.2',
         junit                   : '4.12',
         testRunner              : '1.2.0',
@@ -50,14 +50,12 @@ ext {
             MvRx: "com.airbnb.android:mvrx:${versions.MvRx}"
     ]
 
-    daggerDependencies = [
-            dagger         : "com.google.dagger:dagger:${versions.dagger}",
-            deaggerAndroidSupport: "com.google.dagger:dagger-android-support:${versions.dagger}"
+    injectionDependencies = [
+            koin         : "org.koin:koin-android:${versions.koinVersion}"
     ]
 
     kaptDependencies = [
-            daggerCompiler : "com.google.dagger:dagger-compiler:${versions.dagger}",
-            daggerProcessor: "com.google.dagger:dagger-android-processor:${versions.dagger}"
+            epoxyProcessor: "com.airbnb.android:epoxy-processor:${versions.epoxyVersion}"
     ]
 
     testingDependencies = [

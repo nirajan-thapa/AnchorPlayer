@@ -27,7 +27,7 @@ dependencies {
     implementation kotlinDependencies.values()
     implementation ktxDependencies.values()
     implementation styleDependencies.values()
-    implementation daggerDependencies.values()
+    implementation injectionDependencies.values()
     kapt kaptDependencies.values()
 
     implementation testingDependencies.values()
