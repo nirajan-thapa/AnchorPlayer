@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
 
-interface AnchorPlayerService {
+interface AnchorPlayerAPIService {
 
     @Headers("Accept: application/json")
     @GET("challenges/{name}")

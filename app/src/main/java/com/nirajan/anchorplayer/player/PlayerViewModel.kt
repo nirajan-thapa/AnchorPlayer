@@ -6,7 +6,7 @@ import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.Uninitialized
 import com.airbnb.mvrx.ViewModelContext
-import com.nirajan.anchorplayer.api.AnchorPlayerService
+import com.nirajan.anchorplayer.api.AnchorPlayerAPIService
 import com.nirajan.anchorplayer.api.models.Track
 import com.nirajan.anchorplayer.api.models.TracksResponse
 import com.nirajan.anchorplayer.base.BaseViewModel
@@ -20,7 +20,7 @@ data class PlayerState(
 
 class PlayerViewModel(
     initialState: PlayerState,
-    private val anchorPlayerService: AnchorPlayerService
+    private val anchorPlayerAPIService: AnchorPlayerAPIService
 ) : BaseViewModel<PlayerState>(initialState) {
 
     init {
@@ -30,7 +30,7 @@ class PlayerViewModel(
     private fun fetchTracks() = withState { state ->
         if (state.request is Loading) return@withState
 
-        anchorPlayerService
+        anchorPlayerAPIService
             .getChallenge("bsb.json")
             .subscribeOn(Schedulers.io())
             .execute {
@@ -50,8 +50,8 @@ class PlayerViewModel(
     companion object : MvRxViewModelFactory<PlayerViewModel, PlayerState> {
 
         override fun create(viewModelContext: ViewModelContext, state: PlayerState): PlayerViewModel {
-            val service: AnchorPlayerService by viewModelContext.activity.inject()
-            return PlayerViewModel(state, service)
+            val APIService: AnchorPlayerAPIService by viewModelContext.activity.inject()
+            return PlayerViewModel(state, APIService)
         }
     }
 }

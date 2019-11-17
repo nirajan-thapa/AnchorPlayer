@@ -21,11 +21,13 @@ class TrackRow @JvmOverloads constructor(
 
     private val titleView: TextView
     private val trackImage: ImageView
+    private val playIcon: ImageView
 
     init {
         inflate(context, R.layout.track_row, this)
         titleView = findViewById(R.id.title)
         trackImage = findViewById(R.id.image)
+        playIcon = findViewById(R.id.play)
     }
 
     @TextProp
@@ -40,6 +42,6 @@ class TrackRow @JvmOverloads constructor(
 
     @CallbackProp
     fun setClickListener(clickListener: OnClickListener?) {
-        setOnClickListener(clickListener)
+        playIcon.setOnClickListener(clickListener)
     }
 }

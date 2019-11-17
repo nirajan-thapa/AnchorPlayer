@@ -1,7 +1,7 @@
 package com.nirajan.anchorplayer
 
 import android.app.Application
-import com.nirajan.anchorplayer.api.AnchorPlayerService
+import com.nirajan.anchorplayer.api.AnchorPlayerAPIService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Moshi.Builder
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -39,6 +39,6 @@ private val anchorPlayerService = module {
     }
 
     single {
-        get<Retrofit>().create(AnchorPlayerService::class.java)
+        get<Retrofit>().create(AnchorPlayerAPIService::class.java)
     }
 }
