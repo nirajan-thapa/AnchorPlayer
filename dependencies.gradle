@@ -13,6 +13,8 @@ ext.versions = [
         epoxyVersion            : '3.7.0',
         koinVersion             : '2.0.1',
         constraintLayout        : '1.1.2',
+        retrofitVersion         : '2.4.0',
+        moshiVersion            : '1.6.0',
         junit                   : '4.12',
         testRunner              : '1.2.0',
         assertj                 : '3.11.1',
@@ -55,7 +57,16 @@ ext {
     ]
 
     kaptDependencies = [
-            epoxyProcessor: "com.airbnb.android:epoxy-processor:${versions.epoxyVersion}"
+            epoxyProcessor: "com.airbnb.android:epoxy-processor:${versions.epoxyVersion}",
+            moshiProcessor: "com.squareup.moshi:moshi-kotlin-codegen:${versions.moshiVersion}"
+    ]
+
+    apiDependencies = [
+            retrofit        :  "com.squareup.retrofit2:retrofit:${versions.retrofitVersion}",
+            retrofitAdapter : "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofitVersion}",
+            retrofitMoshi   : "com.squareup.retrofit2:converter-moshi:${versions.retrofitVersion}",
+            moshi           : "com.squareup.moshi:moshi:${versions.moshiVersion}",
+            moshiKotlin     : "com.squareup.moshi:moshi-kotlin:${versions.moshiVersion}"
     ]
 
     testingDependencies = [
