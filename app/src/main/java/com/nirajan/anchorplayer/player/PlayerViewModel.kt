@@ -1,5 +1,6 @@
 package com.nirajan.anchorplayer.player
 
+import android.media.MediaPlayer
 import com.airbnb.mvrx.Async
 import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.MvRxState
@@ -15,6 +16,8 @@ import org.koin.android.ext.android.inject
 
 data class PlayerState(
     val tracks: List<Track> = emptyList(),
+    val currentTrackIndex: Int = -1,
+    val isPlaying: Boolean = false,
     val request: Async<TracksResponse> = Uninitialized
 ) : MvRxState
 
@@ -23,7 +26,10 @@ class PlayerViewModel(
     private val anchorPlayerAPIService: AnchorPlayerAPIService
 ) : BaseViewModel<PlayerState>(initialState) {
 
+    private val mediaPlayer: MediaPlayer = MediaPlayer()
+
     init {
+        mediaPlayer.setOnCompletionListener { playNextTrack() }
         fetchTracks()
     }
 
@@ -36,9 +42,69 @@ class PlayerViewModel(
             .execute {
                 copy(
                     request = it,
-                    tracks = it()?.results ?: emptyList()
+                    tracks = it()?.results?.filter {
+                        it.mediaUrl.contains("audio-ssl")
+                    } ?: emptyList()
                 )
             }
+    }
+
+    /**
+     * Intentional naive implementation of media player.
+     * A robust implementation would include following:
+     * - Media Player Service that extends Android Service
+     * - Displays notification
+     * - Service binds to the Activity/Fragment
+     *
+     */
+    fun playOrPauseTrack(index: Int) = withState {
+        if (index == it.currentTrackIndex) {
+            if (it.isPlaying)
+                mediaPlayer.pause()
+            else
+                mediaPlayer.start()
+            setState {
+                copy(
+                    isPlaying = !it.isPlaying,
+                    currentTrackIndex = index
+                )
+            }
+        } else {
+            stopPlayer()
+            mediaPlayer.setDataSource((it.tracks[index]).mediaUrl)
+            mediaPlayer.prepare()
+            mediaPlayer.start()
+            setState {
+                copy(
+                    isPlaying = true,
+                    currentTrackIndex = index
+                )
+            }
+        }
+    }
+
+    private fun playNextTrack() = withState {
+        val nextIndex =
+            if ((it.currentTrackIndex + 1) >= 0 && (it.currentTrackIndex + 1) < it.tracks.size)
+                it.currentTrackIndex + 1
+            else
+                0
+        playOrPauseTrack(nextIndex)
+    }
+
+    private fun stopPlayer() {
+        mediaPlayer.stop()
+        mediaPlayer.reset()
+    }
+
+    fun stopTrack() = withState {
+        stopPlayer()
+        setState {
+            copy(
+                currentTrackIndex = -1,
+                isPlaying = false
+            )
+        }
     }
 
     /**

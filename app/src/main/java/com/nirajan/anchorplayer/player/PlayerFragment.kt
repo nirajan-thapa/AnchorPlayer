@@ -34,6 +34,14 @@ class PlayerFragment : BaseFragment() {
                 id("track-$index")
                 title(track.title)
                 image(track.imageUrl)
+                if (state.currentTrackIndex == index && state.isPlaying) {
+                    playerIcon(R.drawable.ic_pause)  // pausing current
+                } else {
+                    playerIcon(R.drawable.ic_play)
+                }
+                clickListener { _ ->
+                    viewModel.playOrPauseTrack(index)
+                }
             }
         }
     }
@@ -49,6 +57,11 @@ class PlayerFragment : BaseFragment() {
                 .show()
             Log.w(TAG, "Tracks request failed", error)
         })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.stopTrack()
     }
 
     companion object {

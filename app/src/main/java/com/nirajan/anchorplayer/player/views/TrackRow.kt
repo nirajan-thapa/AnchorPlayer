@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.airbnb.epoxy.CallbackProp
 import com.airbnb.epoxy.ModelProp
@@ -38,6 +39,11 @@ class TrackRow @JvmOverloads constructor(
     @ModelProp
     fun setImage(imageUrl: String) {
         Glide.with(context).load(imageUrl).into(trackImage)
+    }
+
+    @ModelProp
+    fun setPlayerIcon(@DrawableRes drawableRes: Int) {
+        playIcon.setImageResource(drawableRes)
     }
 
     @CallbackProp
